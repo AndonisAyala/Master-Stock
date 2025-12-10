@@ -73,6 +73,24 @@ Estructura del repositorio (resumen)
 - `uploads/` — Archivos subidos (NO versionar).
 - `ready/` — Imágenes procesadas (NO versionar).
 
+## Esquema MySQL exportado
+
+Se ha añadido a la raíz el volcado de la estructura MySQL sin datos: `schema_mysql_sample.sql`.
+Este archivo contiene las tablas principales utilizadas por Master-Stock. Ejemplos relevantes:
+
+- Tablas referenciadas por la integración con A2Softway (estado: descontinuadas):
+  - `producto`, `categoria`, `departamento`, `marca` — Estas tablas estaban originalmente sincronizadas con A2Softway; actualmente su uso en la integración ha sido descontinuado en favor de las tablas y flujos locales del proyecto. No se publica la estructura interna de A2Softway.
+
+- Tablas/BD locales usadas por módulos del proyecto:
+  - `invproducto` — almacena inventario de productos que no están en A2; utilizado por el módulo de "Inventario local" para registrar productos desde el punto de venta o inventario físico.
+  - `imagenes` — metadatos de imágenes (nombre, URL, fecha/hora de subida) usados por `uploadImg02.py`.
+  - `checkproducto` — registros de verificación de productos contra A2Softway (estado de verificación y fecha de última revisión).
+
+Nota sobre el módulo de inventario local:
+- El proyecto incluye un módulo que permite registrar/gestionar inventario de productos que aún no existen en A2. Este módulo está pensado para uso en la red local del establecimiento y puede accederse desde cualquier dispositivo con acceso a la LAN (PC, tablet, móvil). Su función principal es capturar código, descripción, marca, posición y cantidad, y opcionalmente preparar esos registros para su revisión o sincronización posterior.
+
+No se incluye ni se publica la estructura interna de la base de datos de A2Softway; para integraciones con A2 es necesario contar con permisos y acuerdos con el administrador del sistema A2.
+
 Seguridad y buenas prácticas
 - Nunca almacenar tokens, credenciales ni `.env` dentro del repo. Añadir a `.gitignore` los archivos sensibles: `token.json`, `.env`, `.venv/`, `uploads/`, `ready/`, `Master-Stocks/temp/`.
 - Si algún secreto se filtró, rotar/revocar inmediatamente (ImgBB API keys, otros). Luego limpiar el historial con `git filter-repo` o BFG (operación destructiva — hacer backup).
