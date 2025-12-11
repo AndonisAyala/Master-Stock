@@ -15,12 +15,12 @@ function searchProducts(req) {
             for (let i = 0; i < response.length; i++) {
                 let producto = response[i];
 
-                // 🔹 chequeado: si es 1 → check-circle-fill, si es 0 → x-circle-fill
+                // chequeado: si es 1 → check-circle-fill, si es 0 → x-circle-fill
                 let checkIcon = producto.chequeado == 1
                     ? '<i class="bi bi-check-circle-fill text-success"></i>'
                     : '<i class="bi bi-x-circle-fill text-danger"></i>';
 
-                // 🔹 imagen: hacemos petición a buscarImagenProducto.php
+                // imagen: hacemos petición a buscarImagenProducto.php
                 $.ajax({
                     url: "../../controller/php/buscarImagenProducto.php",
                     method: "POST",
@@ -263,7 +263,7 @@ function searchProductsId(req) {
             $("#cantidadInput").val(response[0].cantidad);
             $("#pesoInput").val(response[0].peso);
             $('#checkProducto').prop('checked', response[0].chequeado === 1);
-
+            $('#lastCheckUpdate').text(response?.[0]?.fechaChequeo ? 'Última actualización: ' + response[0].fechaChequeo : 'No chequeado aún');
         },
         error: function (xhr, status, error) {
             console.error("Error en la petición:", error);
