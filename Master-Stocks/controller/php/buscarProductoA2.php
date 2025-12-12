@@ -38,8 +38,7 @@ try {
                           FM_CODE AS codigo,
                           FM_DESCRIPCION AS moneda,
                           FM_FACTOR AS cambio
-                       FROM Smoneda
-                       WHERE FM_CODE = 2";
+                       FROM Smoneda";
 
     $resultadoFactorCambio = $db->executeQuery($sqlFactorCambio);
     $factorCambioRaw = $db->fetchAll($resultadoFactorCambio);
@@ -185,9 +184,9 @@ try {
                 'puesto' => $puestoEspecifico,
                 'cantidad' => $existencia,
                 'costo' => $precios[$codigo]['costo'] ?? 0,
-                'precio1' => isset($precios[$codigo]['precio1']) ? number_format((($precios[$codigo]['precio1'] * 1.16) * floatval($factorCambio['2']['cambio'])), 2, ',', '.') : 0,
-                'precio2' => isset($precios[$codigo]['precio2']) ? number_format((($precios[$codigo]['precio2'] * 1.16) * floatval($factorCambio['2']['cambio'])), 2, ',', '.') : 0,
-                'precio3' => isset($precios[$codigo]['precio3']) ? number_format((($precios[$codigo]['precio3'] * 1.16) * floatval($factorCambio['2']['cambio'])), 2, ',', '.') : 0,
+                'precio1' => isset($precios[$codigo]['precio1']) ? number_format((($precios[$codigo]['precio1'] * 1.16) * floatval($factorCambio['2']['cambio'])), 2, ',', '.') . ' - ' . number_format(((($precios[$codigo]['precio1'] * 1.16) * floatval($factorCambio['2']['cambio'])) / floatval($factorCambio['6']['cambio'])), 2, ',', '.') : 0,
+                'precio2' => isset($precios[$codigo]['precio2']) ? number_format((($precios[$codigo]['precio2'] * 1.16) * floatval($factorCambio['2']['cambio'])), 2, ',', '.') . ' - ' . number_format(((($precios[$codigo]['precio2'] * 1.16) * floatval($factorCambio['2']['cambio'])) / floatval($factorCambio['6']['cambio'])), 2, ',', '.') : 0,
+                'precio3' => isset($precios[$codigo]['precio3']) ? number_format((($precios[$codigo]['precio3'] * 1.16) * floatval($factorCambio['2']['cambio'])), 2, ',', '.') . ' - ' . number_format(((($precios[$codigo]['precio3'] * 1.16) * floatval($factorCambio['2']['cambio'])) / floatval($factorCambio['6']['cambio'])), 2, ',', '.') : 0,
                 'chequeado' => $chequeado,
                 'fechaChequeo' => $fechaChequeo
             ];
@@ -322,9 +321,9 @@ try {
                 'puesto' => $existencias[$codigo]['puesto'] ?? 'S/P',
                 'cantidad' => $existencias[$codigo]['existencia'] ?? 0,
                 'costo' => $precios[$codigo]['costo'] ?? 0,
-                'precio1' => isset($precios[$codigo]['precio1']) ? number_format((($precios[$codigo]['precio1'] * 1.16) * floatval($factorCambio['2']['cambio'])), 2, ',', '.') : 0,
-                'precio2' => isset($precios[$codigo]['precio2']) ? number_format((($precios[$codigo]['precio2'] * 1.16) * floatval($factorCambio['2']['cambio'])), 2, ',', '.') : 0,
-                'precio3' => isset($precios[$codigo]['precio3']) ? number_format((($precios[$codigo]['precio3'] * 1.16) * floatval($factorCambio['2']['cambio'])), 2, ',', '.') : 0,
+                'precio1' => isset($precios[$codigo]['precio1']) ? number_format((($precios[$codigo]['precio1'] * 1.16) * floatval($factorCambio['2']['cambio'])), 2, ',', '.') . ' - ' . number_format(((($precios[$codigo]['precio1'] * 1.16) * floatval($factorCambio['2']['cambio'])) / floatval($factorCambio['6']['cambio'])), 2, ',', '.') : 0,
+                'precio2' => isset($precios[$codigo]['precio2']) ? number_format((($precios[$codigo]['precio2'] * 1.16) * floatval($factorCambio['2']['cambio'])), 2, ',', '.') . ' - ' . number_format(((($precios[$codigo]['precio2'] * 1.16) * floatval($factorCambio['2']['cambio'])) / floatval($factorCambio['6']['cambio'])), 2, ',', '.') : 0,
+                'precio3' => isset($precios[$codigo]['precio3']) ? number_format((($precios[$codigo]['precio3'] * 1.16) * floatval($factorCambio['2']['cambio'])), 2, ',', '.') . ' - ' . number_format(((($precios[$codigo]['precio3'] * 1.16) * floatval($factorCambio['2']['cambio'])) / floatval($factorCambio['6']['cambio'])), 2, ',', '.') : 0,
                 'chequeado' => $chequeado,
                 'fechaChequeo' => $fechaChequeo
             ];
